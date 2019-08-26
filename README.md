@@ -43,10 +43,10 @@ Converted the arrdate to timestamp .
 The tools utilized on this project are the same as we have been learning during this Nanodegree.
 
 -  Python
-  - --Pyarrow
-  - --Pandas
-  - --Collections
-  - --s3fs
+   --Pyarrow
+   --Pandas
+   --Collections
+   --s3fs
 - AWS S3
 - AWS Redshift
 
