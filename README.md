@@ -52,6 +52,8 @@ The tools utilized on this project are the same as we have been learning during 
 
 **Data Model :**
 
+![alt tag](https://github.com/TDPrabhu/Capstone-Project/blob/master/datamodel.PNG)
+
  
 | immigration\_stagging | Stagging Table |
 | --- | --- |
@@ -107,6 +109,8 @@ If we are running this in the AWS cloud environment, create this etl.py as an la
 4. Next Execute the etl.py
 
    python etl.py
+   
+   ![alt tag](https://github.com/TDPrabhu/Capstone-Project/blob/master/etl-pipeline.PNG)
 
  
 Re run the create\_tables.py, whenever you do the change to sql\_queries.py or before you execute the etl.py
