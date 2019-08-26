@@ -14,13 +14,12 @@ Have used Python and its library to extract, transform and load data (etl). Pyth
 
 I have used the data set provided by udacity . Have chossen 2 different type of data set (i94\_jan16\_sub.sas7bdat , usa-cities-demography.csv ) .
 
-1. 1)i94\_jan16\_sub.sas7bdat has more than 2.8 million records .
-2. 2)usa-cities-demography.csv has more than 3 thousand reocrds .
-
-Below is the assumption on the data columns, after the analysis on the data fetched from i94\_jan16\_sub.sas7bdat.
+   1)i94\_jan16\_sub.sas7bdat has more than 2.8 million records .
+   2)usa-cities-demography.csv has nearly than 3 thousand reocrds .
 
 **Explore and Assess the Data :**
-
+ 
+ Below is the assumption on the data columns, after the analysis on the data fetched from i94\_jan16\_sub.sas7bdat.
  Loaded the complete data set into pandas and analysed the data set .
 
 Example :- da.cicid.isnull().sum().sum() to check for the null values
@@ -44,12 +43,10 @@ Converted the arrdate to timestamp .
 The tools utilized on this project are the same as we have been learning during this Nanodegree.
 
 -  Python
-
-- --Pyarrow
-- --Pandas
-- --Collections
-- --s3fs
-
+  - --Pyarrow
+  - --Pandas
+  - --Collections
+  - --s3fs
 - AWS S3
 - AWS Redshift
 
