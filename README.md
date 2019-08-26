@@ -102,58 +102,47 @@ If we are running this in the AWS cloud environment, create this etl.py as an la
 
 3. First execute the create\_tables.py.
 
-python create\_tables.py
+   python create\_tables.py
 
 4. Next Execute the etl.py
 
-python etl.py
+   python etl.py
 
  
 Re run the create\_tables.py, whenever you do the change to sql\_queries.py or before you execute the etl.py
 
 **Example query for song play analysis**
 
-**select** state, visa\_type **from**
-
+select state, visa\_type from
 (
-
-**select** state, visa\_type, **rank** () **over** ( **partition**** by **state** order ****by** agg\_tot **desc** ) agg\_values
-
-**from**
-
+select state, visa\_type, rank () over ( partition by state order by agg\_tot desc ) agg\_values
+from
 (
-
-**select** b.visa\_type,c.state,
-
-**count** (1) agg\_tot
-
-**from** public.fact\_immigration a,public.dim\_visa b ,public.dim\_usa\_state c
-
-**where** a.visa\_id =b.visa\_id
-
-**and** a.usa\_state\_id =c.usa\_state\_id
-
-**group**** by** b.visa\_type,c.state
-
+select b.visa\_type,c.state,
+count (1) agg\_tot
+from public.fact\_immigration a,public.dim\_visa b ,public.dim\_usa\_state c
+where a.visa\_id =b.visa\_id
+and a.usa\_state\_id =c.usa\_state\_id
+group by b.visa\_type,c.state
 ) )
 
-**where** agg\_values = 1;
-
+where agg\_values = 1;
 
 
 **Scenarios**
 
-1. **The data was increased by 100x: -** Technically we have used Python for data processing, S3 for storage and Redshift cluster as database. I can use Spark for data processing, processing each file and storing them in the S3 bucket. All the data processing stuffs can be handed over to Spark.  SPARK for data processing, S3 for storage, Redshift as a database.
-- If we completely deploy our project in AWS environment, we can also try AWS Glue, it&#39;s an AWS managed service ETL tool. So, our new tech stack will be (AWS GLUE, AWS S3, AWS Redshift / AWS Athena). AWS Glue and AWS Athena are serverless
+1. **The data was increased by 100x.** 
+ 
+ -  In this project we have used Python for data processing, S3 for storage and Redshift as database. we can repalce                         python(etl.py) with Spark for data processing,. All the data processing stuffs can be handed over to Spark.  This make the data         processing still more faster. So the tech stack will be (Spark, S3 ,Redshift)
+ - If we completely deploy our project in AWS environment, we can also try AWS Glue, it&#39;s an AWS managed service ETL tool. So, our      new tech stack will be (AWS GLUE, AWS S3, AWS Redshift / AWS Athena).
 
-2. **The pipelines would be run daily by 7 am every day.**  ** **
+2. **The pipelines would be run daily by 7 am every day.**  
 
 - We can use Airflow for orchestrating all the functions and schedule it on @daily 7 am
-- If we are completely deploying our project in the AWS environment, then we can use the cloud watch event to schedule the job to run daily on 7 am
+- If we are completely deploying our project in the AWS environment, then we can use the cloud watch event to schedule the job to run     daily on 7 am
 
 3. **The database needed to be accessed by 100+ people.**
 
 - Redshift is highly scalable, hence that will not be problem
-- Can also use AWS Athena, as it is serverless query service. There is also no need to load         S3 data into Athena, which makes it easier and faster for consumer or analyst to gain insight. It also can access by 100+ people.
-
-Apache Spark, S3 (data partition based on year, month, day), Athena will make a good tech stack
+- Can also use AWS Athena, as it is serverless query service. There is also no need to load S3 data into Athena, which makes it easier     and faster for consumer or analyst to gain insight. It also can access by 100+ people.
+  Apache Spark, S3 (data partition based on year, month, day), Athena will make a good tech stack
