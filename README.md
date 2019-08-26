@@ -43,10 +43,10 @@ Converted the arrdate to timestamp .
 The tools utilized on this project are the same as we have been learning during this Nanodegree.
 
 -  Python
-   --Pyarrow
-   --Pandas
-   --Collections
-   --s3fs
+    - --Pyarrow
+    - --Pandas
+    - --Collections
+    - --s3fs
 - AWS S3
 - AWS Redshift
 
@@ -78,27 +78,27 @@ Tables are created by executing the Python script create\_tables.py. The create\
 
  Python etl.py is used to extract &amp; transform the data from the file provided. It establishes the connection to the DB, then it extracts the required information from the files mentioned in the path and stores the data in to the appropriate tables. It checks for the duplicate before inserting the record into the tables. The code is modularized and provided all the comments.
 
-1. 1)upload\_immigration\_data\_S3: Function will fetch immigration data and store it in the S3 bucket. All the transformation is done like checking for the data type, date format &amp; etc. defaultdict are used to map country and us states.
+ 1)upload\_immigration\_data\_S3: Function will fetch immigration data and store it in the S3 bucket. All the transformation is done like checking for the data type, date format &amp; etc. defaultdict are used to map country and us states.
 
--  The valid US states are loaded into the dictionary and checked for the same, if the column has other than values provided in dictionary it will be replaced it with Other.
+  -  The valid US states are loaded into the dictionary and checked for the same, if the column has other than values provided in dictionary it will be replaced it with Other.
 - The valid Country and their respective country code are loaded into the dictionary and checked for the same, if the column has other than values provided in dictionary it will be replaced it with Other.
 
-Once all the transformation is done the data are loaded back into the pandas data frame, later it is converted into the parquet file. The parquet file in loaded into the S3 bucket.
+  Once all the transformation is done the data are loaded back into the pandas data frame, later it is converted into the parquet file. The parquet file in loaded into the S3 bucket.
 
-The parquet file is loaded into two folders Source &amp; Result.  Whenever the etl.py is run, the Files in the Result folder will be deleted, we delete the files in the folder because we load the **delta data** to redshift from this folder.
+  The parquet file is loaded into two folders Source &amp; Result.  Whenever the etl.py is run, the Files in the Result folder will be deleted, we delete the files in the folder because we load the **delta data** to redshift from this folder.
 
-1. 2)upload\_usa\_demography\_S3: Function will fetch and load the usa-cities-demography.csv into S3 bucket.
-2. 3)load\_staging\_tables : loads  the data from S3 bucket into the Redshift Stagging table .
-3. 4)insert\_tables : inserts the data into the Redshift dim and fact table .
-4. 5)validation\_records :-  Validate the record count of immigration\_stagging &amp; fact\_immigration table
+ 2)upload\_usa\_demography\_S3: Function will fetch and load the usa-cities-demography.csv into S3 bucket.
+ 3)load\_staging\_tables : loads  the data from S3 bucket into the Redshift Stagging table .
+ 4)insert\_tables : inserts the data into the Redshift dim and fact table .
+ 5)validation\_records :-  Validate the record count of immigration\_stagging &amp; fact\_immigration table
 
 If we are running this in the AWS cloud environment, create this etl.py as an lambda service and schedule it with the cloud watch service.
 
 **Steps to execute the code :**
 
 1. Open a new terminal
-2.  !pip install pyarrow
- !pip install s3fs
+2. - !pip install pyarrow
+   - !pip install s3fs
 
 3. First execute the create\_tables.py.
 
@@ -144,15 +144,14 @@ Re run the create\_tables.py, whenever you do the change to sql\_queries.py or b
 **Scenarios**
 
 1. **The data was increased by 100x: -** Technically we have used Python for data processing, S3 for storage and Redshift cluster as database. I can use Spark for data processing, processing each file and storing them in the S3 bucket. All the data processing stuffs can be handed over to Spark.  SPARK for data processing, S3 for storage, Redshift as a database.
+- If we completely deploy our project in AWS environment, we can also try AWS Glue, it&#39;s an AWS managed service ETL tool. So, our new tech stack will be (AWS GLUE, AWS S3, AWS Redshift / AWS Athena). AWS Glue and AWS Athena are serverless
 
- If we completely deploy our project in AWS environment, we can also try AWS Glue, it&#39;s an AWS managed service ETL tool. So, our new tech stack will be (AWS GLUE, AWS S3, AWS Redshift / AWS Athena). AWS Glue and AWS Athena are serverless
-
-1. **The pipelines would be run daily by 7 am every day.**  ** **
+2. **The pipelines would be run daily by 7 am every day.**  ** **
 
 - We can use Airflow for orchestrating all the functions and schedule it on @daily 7 am
 - If we are completely deploying our project in the AWS environment, then we can use the cloud watch event to schedule the job to run daily on 7 am
 
-1. **The database needed to be accessed by 100+ people.**
+3. **The database needed to be accessed by 100+ people.**
 
 - Redshift is highly scalable, hence that will not be problem
 - Can also use AWS Athena, as it is serverless query service. There is also no need to load         S3 data into Athena, which makes it easier and faster for consumer or analyst to gain insight. It also can access by 100+ people.
