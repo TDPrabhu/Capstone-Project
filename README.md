@@ -1,5 +1,4 @@
 # Capstone-Project
-Data modeling with Redshift and build an ETL pipeline using Python.
 
 **Objective :**  To Anlayse on the visa type of the immigrants and maximum number of visa type each states owns . 
 
@@ -125,7 +124,6 @@ where a.visa\_id =b.visa\_id
 and a.usa\_state\_id =c.usa\_state\_id
 group by b.visa\_type,c.state
 ) )
-
 where agg\_values = 1;
 
 
