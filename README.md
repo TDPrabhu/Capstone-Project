@@ -1,7 +1,7 @@
 # Capstone-Project
 Data modeling with Redshift and build an ETL pipeline using Python.
 
-**Objective :**  To Anlayse on the visa type of the immigrants. 
+**Objective :**  To Anlayse on the visa type of the immigrants and maximum number of visa type each states owns . 
 
 The purpose of this project is to create an ETL pipeline(etl.py) which extracts the data (i94\_jan16\_sub.sas7bdat, usa-cities-demography.csv), convert them into parquet format and store them in the S3 bucket. After the file saved in the S3 bucket, we load them in to the Redshift database for the data consumers to consume the data.
 
