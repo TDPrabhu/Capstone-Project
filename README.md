@@ -8,6 +8,7 @@ Redshift is designed with fact table and multiple dimension tables with required
 
 Have used Python and its library to extract, transform and load data (etl). Python script etl.py is used for extracting the data from the files provided, transform and store the data in the database. The script uses psycopg2 package to data munging and connect to the database. It does all the required validation like checking for the duplicate before inserting the data into the DB.
 
+ ![alt tag](https://github.com/TDPrabhu/Capstone-Project/blob/master/Architecture.PNG)
  
 **Dataset :**
 
