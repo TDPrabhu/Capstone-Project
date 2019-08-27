@@ -90,9 +90,12 @@ Tables are created by executing the script create\_tables.py. The create\_tables
  - The parquet file is loaded into two folders Source &amp; Result. The source will contain all the files and the result folder wil have    only the **delta files** .
 
  2)upload\_usa\_demography\_S3: Function will fetch and load the usa-cities-demography.csv into S3 bucket.
- 3)load\_staging\_tables : loads  the data from S3 bucket into the Redshift Stagging table .
- 4)insert\_tables : inserts the data into the Redshift dim and fact table .
- 5)validation\_records :-  Validate the record count of immigration\_stagging &amp; fact\_immigration table
+ 
+ 3)load\_staging\_tables : Loads the data from S3 bucket into the Redshift Staging table.
+ 
+ 4)insert\_tables : Inserts the data into the dim and fact table.
+ 
+ 5)validation\_records :- Validate the record count of immigration\_stagging &amp; fact\_immigration table
 
 If we are running this in the AWS cloud environment, create this etl.py as an lambda service and schedule it with the cloud watch service.
 
@@ -136,16 +139,16 @@ where agg\_values = 1;
 
 1. **The data was increased by 100x.** 
  
- -  In this project we have used Python for data processing, S3 for storage and Redshift as database. we can repalce                         python(etl.py) with Spark for data processing,. All the data processing stuffs can be handed over to Spark.  This make the data         processing still more faster. So the tech stack will be (Spark, S3 ,Redshift)
- - If we completely deploy our project in AWS environment, we can also try AWS Glue, it&#39;s an AWS managed service ETL tool. So, our      new tech stack will be (AWS GLUE, AWS S3, AWS Redshift / AWS Athena).
+ -  In this project we have used Python for data processing, S3 for storage and Redshift as database. we can replace                         python(etl.py) with Spark for data processing,. All the data processing can be handed over to Spark.  This make the data                 processing even more faster. So the tech stack will be (Spark, S3 ,Redshift)
+ - If we deploy our project in AWS environment, we can also try with AWS Glue, it&#39;s. If So, then the new tech stack will be (AWS        GLUE, AWS S3, AWS Redshift / AWS Athena).
 
-2. **The pipelines would be run daily by 7 am every day.**  
+2. **The pipelines would run daily by 7 am every day.**  
 
-- We can use Airflow for orchestrating all the functions and schedule it on @daily 7 am
-- If we are completely deploying our project in the AWS environment, then we can use the cloud watch event to schedule the job to run     daily on 7 am
+- We can use Airflow for orchestrating all the functions and schedule it @daily 7 am.
+- we can use the AWS Cloudwatch event as an option to schedule the job if we are deploying this project in the AWS environment.
 
 3. **The database needed to be accessed by 100+ people.**
 
-- Redshift is highly scalable, hence that will not be problem
-- Can also use AWS Athena, as it is serverless query service. There is also no need to load S3 data into Athena, which makes it easier     and faster for consumer or analyst to gain insight. It also can access by 100+ people.
-  Apache Spark, S3 (data partition based on year, month, day), Athena will make a good tech stack
+- Redshift is highly scalable, hence this will not be problem.
+- We can also use AWS Athena, as it is serverless query service. One of the advantage is there is no need of loading S3 data into         Athena, which makes it easier and faster for consumer or analyst to gain insight. 
+  Apache Spark, S3 (data partition based on year, month, day) & Athena will make a good tech stack
