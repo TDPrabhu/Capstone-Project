@@ -163,4 +163,4 @@ where agg\_values = 1;
 - We can also use AWS Athena, as it is serverless query service. One of the advantage is there is no need of loading S3 data into         Athena, which makes it easier and faster for data consumer to gain insight. 
      1) Apache Spark
      2) S3 (data partition based on year, month, day) 
-     3) Athena
+     3) Athena .
