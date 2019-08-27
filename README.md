@@ -54,9 +54,9 @@ The tools utilized on this project are the same as we have been learning during 
 ![alt tag](https://github.com/TDPrabhu/Capstone-Project/blob/master/datamodel.PNG)
 
  
-| immigration\_stagging | Stagging Table |
+| immigration\_stagging | Staging Table |
 | --- | --- |
-| usa\_demographic\_stagging | Stagging Table |
+| usa\_demographic\_stagging | Staging Table |
 | dim\_visa | Dimension Table |
 | dim\_date | Dimension Table |
 | dim\_usa\_state | Dimension Table |
@@ -77,7 +77,7 @@ Tables are created by executing the script create\_tables.py. The create\_tables
 
 **ETL Pipeline:**
 
- Python etl.py is used to extract &amp; transform the data from the file provided. It establishes the connection to the DB, then it extracts the required information from the files mentioned in the path and stores the data in to the appropriate staging tables. It checks for the duplicate before inserting the record into the facts and dim. The code is modularized and provided all the comments.
+ etl.py is used to extract &amp; transform the data from the file provided. It establishes the connection to the DB, then it extracts the required information from the files mentioned in the path and stores the data in to the appropriate staging tables. It checks for the duplicate before inserting the record into the facts and dim. The code is modularized and provided all the comments.
 
  1)upload\_immigration\_data\_S3: Function will fetch immigration data and store it in the S3 bucket. All the transformation like checking the data type, date format &amp; etc, the defaultdict are used to map country and us states.
 
@@ -139,13 +139,18 @@ where agg\_values = 1;
 
 1. **The data was increased by 100x.** 
  
- -  In this project we have used Python for data processing, S3 for storage and Redshift as database. we can replace                         python(etl.py) with Spark for data processing,. All the data processing can be handed over to Spark.  This make the data                 processing even more faster. So the tech stack will be (Spark, S3 ,Redshift)
+ -  In this project we have used Python for data processing, S3 for storage and Redshift as database. we can replace                         python(etl.py) with Spark for data processing,. All the data processing can be handed over to Spark.  This make the data                 processing even more faster. So the tech stack will be 
+       1) Spark is used for data processing 
+       2) S3 for file storage 
+       3) Redshift as a database
+       
  - If we deploy our project in AWS environment, we can also try with AWS Glue, it&#39;s. If So, then the new tech stack will be (AWS        GLUE, AWS S3, AWS Redshift / AWS Athena).
 
 2. **The pipelines would run daily by 7 am every day.**  
 
 - We can use Airflow for orchestrating all the functions and schedule it @daily 7 am.
-- we can use the AWS Cloudwatch event as an option to schedule the job if we are deploying this project in the AWS environment.
+- If we are running this in the AWS cloud environment, create this etl.py as a lambda service and schedule it with the cloud watch         service.
+  [https://medium.com/blogfoster-engineering/running-cron-jobs-on-aws-lambda-with-scheduled-events-e8fe38686e20]
 
 3. **The database needed to be accessed by 100+ people.**
 
