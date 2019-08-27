@@ -158,5 +158,7 @@ where agg\_values = 1;
 3. **The database needed to be accessed by 100+ people.**
 
 - Redshift is highly scalable, hence this will not be problem.
-- We can also use AWS Athena, as it is serverless query service. One of the advantage is there is no need of loading S3 data into         Athena, which makes it easier and faster for consumer or analyst to gain insight. 
-  Apache Spark, S3 (data partition based on year, month, day) & Athena will make a good tech stack
+- We can also use AWS Athena, as it is serverless query service. One of the advantage is there is no need of loading S3 data into         Athena, which makes it easier and faster for data consumer to gain insight. 
+     1) Apache Spark
+     2) S3 (data partition based on year, month, day) 
+     3) Athena 
