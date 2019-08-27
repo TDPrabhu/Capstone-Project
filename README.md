@@ -1,25 +1,26 @@
 # Capstone-Project
 
-**Objective :**  To Anlayse on the visa type of the immigrants and maximum number of visa type each states owns . 
+**Objective :**  To Anlayse the total number of visa type of the immigrants and also to know the maximum count of visa type statewise.
 
-The purpose of this project is to create an ETL pipeline(etl.py) which extracts the data (i94\_jan16\_sub.sas7bdat, usa-cities-demography.csv), convert them into parquet format and store them in the S3 bucket. After the file saved in the S3 bucket, we load them in to the Redshift database for the data consumers to consume the data.
+The purpose of this project is to create an ETL pipeline(etl.py) which extracts the data (i94\_jan16\_sub.sas7bdat, usa-cities-demography.csv), convert them into parquet format and store them in the S3 bucket and then finally load into RedShift DB. From this DB the analyst can consume the data.
 
-Redshift is designed with fact table and multiple dimension tables with required constraints on the column.
+**Architecture Diagram :**
+The dimentional model which i adopted is based on star schema.
 
-Have used Python and its library to extract, transform and load data (etl). Python script etl.py is used for extracting the data from the files provided, transform and store the data in the database. The script uses psycopg2 package to data munging and connect to the database. It does all the required validation like checking for the duplicate before inserting the data into the DB.
+For ETL(Extract , transform and load) i have used the python programming.For extraction and transformation i have used pandas and pyarrow libraries and to transfer the files to S3 bucket, i have used s3fs libraries. The script uses psycopg2 package for data munging and also to connect to the database and load the data. Before inserting the data, i have included the validation to avoid the redudant data.
 
  ![alt tag](https://github.com/TDPrabhu/Capstone-Project/blob/master/Architecture.PNG)
  
 **Dataset :**
 
-I have used the data set provided by udacity . Have chossen 2 different type of data set (i94\_jan16\_sub.sas7bdat , usa-cities-demography.csv ) .
+I have used the data set provided by the Udacity, of that i have choosen 2 different data set (i94\_jan16\_sub.sas7bdat , usa-cities-demography.csv ) .
 
    1)i94\_jan16\_sub.sas7bdat has more than 2.8 million records .
-   2)usa-cities-demography.csv has nearly than 3 thousand reocrds .
+   2)usa-cities-demography.csv has nearly 3 thousand reocrds .
 
 **Explore and Assess the Data :**
  
- Below is the assumption on the data columns, after the analysis on the data fetched from i94\_jan16\_sub.sas7bdat.
+ Below is the assumption of the data columns, after analysis on the data fetched from i94\_jan16\_sub.sas7bdat.
  Loaded the complete data set into pandas and analysed the data set .
 
 Example :- da.cicid.isnull().sum().sum() to check for the null values
