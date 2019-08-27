@@ -5,7 +5,8 @@
 The purpose of this project is to create an ETL pipeline(etl.py) which extracts the data (i94\_jan16\_sub.sas7bdat, usa-cities-demography.csv), convert them into parquet format and store them in the S3 bucket and then finally load into RedShift DB. From this DB the analyst can consume the data.
 
 **Architecture Diagram :**
-The dimentional model which i adopted is based on star schema.
+
+The dimenional model which i adopted is based on star schema.
 
 For ETL(Extract , transform and load) i have used the python programming.For extraction and transformation i have used pandas and pyarrow libraries and to transfer the files to S3 bucket, i have used s3fs libraries. The script uses psycopg2 package for data munging and also to connect to the database and load the data. Before inserting the data, i have included the validation to avoid the redudant data.
 
