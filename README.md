@@ -150,7 +150,10 @@ where agg\_values = 1;
 
 - We can use Airflow for orchestrating all the functions and schedule it @daily 7 am.
 - If we are running this in the AWS cloud environment, create this etl.py as a lambda service and schedule it with the cloud watch         service.
+
+  [https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/RunLambdaSchedule.html]
   [https://medium.com/blogfoster-engineering/running-cron-jobs-on-aws-lambda-with-scheduled-events-e8fe38686e20]
+  
 
 3. **The database needed to be accessed by 100+ people.**
 
