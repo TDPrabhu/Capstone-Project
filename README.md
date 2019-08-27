@@ -102,7 +102,8 @@ If we are running this in the AWS cloud environment, create this etl.py as an la
 **Steps to execute the code :**
 
 1. Open a new terminal
-2. - !pip install pyarrow
+2. Install the below listed libraries 
+   - !pip install pyarrow
    - !pip install s3fs
 
 3. First execute the create\_tables.py.
