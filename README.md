@@ -1,6 +1,6 @@
 # Capstone-Project
 
-**Objective :**  To Anlayse the total number of visa type of the immigrants and also to know the maximum count of visa type statewise.
+**Objective :**  To Anlayse the total number of visa type of the immigrants and also to know the maximum count of visa type state wise.
 
 The purpose of this project is to create an ETL pipeline(etl.py) which extracts the data (i94\_jan16\_sub.sas7bdat, usa-cities-demography.csv), convert them into parquet format and store them in the S3 bucket and then finally load into RedShift DB. From this DB the analyst can consume the data.
 
@@ -54,6 +54,7 @@ The tools utilized on this project are the same as we have been learning during 
 ![alt tag](https://github.com/TDPrabhu/Capstone-Project/blob/master/datamodel.PNG)
 
  
+
 | immigration\_stagging | Staging Table |
 | --- | --- |
 | usa\_demographic\_stagging | Staging Table |
@@ -149,8 +150,8 @@ where agg\_values = 1;
 
 2. **The pipelines would run daily by 7 am every day.**  
 
-- We can use Airflow for orchestrating all the functions and schedule it @daily 7 am.
-- If we are running this in the AWS cloud environment, create this etl.py as a lambda service and schedule it with the cloud watch         service.
+- We can use Airflow for orchestrating all the tasks and schedule it @daily 7 am.
+- If we are running this in the AWS cloud environment, create this etl.py as a lambda service and schedule it with the cloud watch event.
 
   [https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/RunLambdaSchedule.html]
   [https://medium.com/blogfoster-engineering/running-cron-jobs-on-aws-lambda-with-scheduled-events-e8fe38686e20]
@@ -162,4 +163,4 @@ where agg\_values = 1;
 - We can also use AWS Athena, as it is serverless query service. One of the advantage is there is no need of loading S3 data into         Athena, which makes it easier and faster for data consumer to gain insight. 
      1) Apache Spark
      2) S3 (data partition based on year, month, day) 
-     3) Athena 
+     3) Athena
