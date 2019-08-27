@@ -118,7 +118,7 @@ If we are running this in the AWS cloud environment, create this etl.py as an la
  
 Re run the create\_tables.py, whenever you do the change to sql\_queries.py or before you execute the etl.py
 
-**Example query for song play analysis**
+**Example query for analysis**
 
 select state, visa\_type from
 (
