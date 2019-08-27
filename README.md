@@ -14,15 +14,14 @@ For ETL(Extract , transform and load) i have used the python programming.For ext
  
 **Dataset :**
 
-I have used the data set provided by the Udacity, of that i have choosen 2 different data set (i94\_jan16\_sub.sas7bdat , usa-cities-demography.csv ) .
+I have used the data set provided by the Udacity, of that i chose 2 different data set (i94\_jan16\_sub.sas7bdat , usa-cities-demography.csv ) .
 
    1)i94\_jan16\_sub.sas7bdat has more than 2.8 million records .
    2)usa-cities-demography.csv has nearly 3 thousand reocrds .
 
 **Explore and Assess the Data :**
- 
- Below is the assumption of the data columns, after analysis on the data fetched from i94\_jan16\_sub.sas7bdat.
- Loaded the complete data set into pandas and analysed the data set .
+  
+ After analyzing  the data from 'i94\_jan16\_sub.sas7bdat' file and loading the complete data set using pandas, below are my assumptions of the required data columns,
 
 Example :- da.cicid.isnull().sum().sum() to check for the null values
 
@@ -34,9 +33,7 @@ Example :- da.cicid.isnull().sum().sum() to check for the null values
 - arrdate is date of arrrival .  (need to convert into timestamp )
 - visatype is which type of visa he owns . (no null values found).
 
-Used the defaultdict from collections pacakge to create a dictionary and map the correct values and replace with &#39;Other &#39; for null &amp; bad data .
-
-Have created two defaultdict for the listed column(I94res, I94addr) and loaded them into the data frame (country ,usa\_states) respectively . This help to eliminate the null values and other bad data which are not listed in the dictionary. In future if we need to validate for the new state or country we can add the values in the dictionary an process the data .
+I have created two defaultdict for the listed column(I94res, I94addr) and loaded them into the data frame (country ,usa\_states) respectively . This will help to eliminate the null values and other bad data which are not listed in the dictionary. In future if we need to validate for the new state or country we can add the values in the dictionary and process the data .
 
 Converted the arrdate to timestamp .
 
@@ -76,20 +73,21 @@ The tools utilized on this project are the same as we have been learning during 
 
 **Table Creation:**
 
-Tables are created by executing the Python script create\_tables.py. The create\_tables.py in returns call the sql\_queries.py which has all the DDL statements in it.
+Tables are created by executing the script create\_tables.py. The create\_tables.py in returns will call the sql\_queries.py which has all the DDL statements in it.
 
 **ETL Pipeline:**
 
- Python etl.py is used to extract &amp; transform the data from the file provided. It establishes the connection to the DB, then it extracts the required information from the files mentioned in the path and stores the data in to the appropriate tables. It checks for the duplicate before inserting the record into the tables. The code is modularized and provided all the comments.
+ Python etl.py is used to extract &amp; transform the data from the file provided. It establishes the connection to the DB, then it extracts the required information from the files mentioned in the path and stores the data in to the appropriate staging tables. It checks for the duplicate before inserting the record into the facts and dim. The code is modularized and provided all the comments.
 
- 1)upload\_immigration\_data\_S3: Function will fetch immigration data and store it in the S3 bucket. All the transformation is done like checking for the data type, date format &amp; etc. defaultdict are used to map country and us states.
+ 1)upload\_immigration\_data\_S3: Function will fetch immigration data and store it in the S3 bucket. All the transformation like checking the data type, date format &amp; etc, the defaultdict are used to map country and us states.
 
-  -  The valid US states are loaded into the dictionary and checked for the same, if the column has other than values provided in dictionary it will be replaced it with Other.
-- The valid Country and their respective country code are loaded into the dictionary and checked for the same, if the column has other than values provided in dictionary it will be replaced it with Other.
+  - The valid US states  are loaded into the dictionary , if the column doesnt have the values provided in dictionary it will be             replaced with "Other".
+  
+ - The valid Country and their respective country code are loaded into the dictionary , if the column doesnt have the values provided in    dictionary it will be replaced with "Other".
 
-  Once all the transformation is done the data are loaded back into the pandas data frame, later it is converted into the parquet file. The parquet file in loaded into the S3 bucket.
+ - Once all the transformation is done, the data are loaded into the pandas data frame, converted to parquet file ,then into the S3        bucket.
 
-  The parquet file is loaded into two folders Source &amp; Result.  Whenever the etl.py is run, the Files in the Result folder will be deleted, we delete the files in the folder because we load the **delta data** to redshift from this folder.
+ - The parquet file is loaded into two folders Source &amp; Result. The source will contain all the files and the result folder wil have    only the **delta files** .
 
  2)upload\_usa\_demography\_S3: Function will fetch and load the usa-cities-demography.csv into S3 bucket.
  3)load\_staging\_tables : loads  the data from S3 bucket into the Redshift Stagging table .
